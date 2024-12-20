@@ -166,17 +166,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 
-# CSRF 설정 추가
-CORS_ALLOWED_ORIGINS = [
+if DEBUG:
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     ]
+
+else:
+    CORS_ALLOWED_ORIGINS = [
+        "https://bloplan-frontend.onrender.com",
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        "https://bloplan-frontend.onrender.com",
+    ]
+
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+
 
 
 
