@@ -1,0 +1,24 @@
+databases:
+  - name: bloplan
+    plan: free
+    databaseName: bloplan
+    user: bloplan
+    region: singapore
+
+services:
+  - type: web
+    plan: free
+    name: bloplan
+    runtime: python
+    region: singapore
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bloplan
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
