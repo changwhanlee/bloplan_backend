@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+import sentry_sdk
 import dj_database_url
 
 env = environ.Env()
@@ -189,3 +190,17 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+if not DEBUG:
+    sentry_sdk.init(
+    dsn="https://aa3510b0811d856b912e51e5414aeeb4@o4507797287403520.ingest.us.sentry.io/4508500550680576",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for tracing.
+    traces_sample_rate=1.0,
+    _experiments={
+        # Set continuous_profiling_auto_start to True
+        # to automatically start the profiler on when
+        # possible.
+        "continuous_profiling_auto_start": True,
+    },
+)

@@ -17,6 +17,7 @@ psycopg2-binary = "^2.9.10"
 whitenoise = {extras = ["brotli"], version = "^6.8.2"}
 gunicorn = "^23.0.0"
 uvicorn = {extras = ["standard"], version = "^0.34.0"}
+sentry-sdk = "^2.19.2"
 
 
 [build-system]
